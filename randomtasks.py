@@ -1,15 +1,15 @@
-import random, itertools, bisect
+import random
 
-def randomtasks(tasks):
-	population = [val for val, cnt in tasks for i in range(cnt)]
+def randomtasks(tasks):	
+	population = [task for task in tasks for i in range(tasks[task])]
 	return random.choice(population)
 
-def randomtasks_bisect(tasks):
-	choices, weights = zip(*tasks)
-	cumdist = list(itertools.accumulate(weights))
-	x = random.random() * cumdist[-1]
-	return choices[bisect.bisect(cumdist, x)]
 
 if __name__ == '__main__':
-	tasks = [('CS', 8), ('Math', 4), ('Lang', 5), ('Sci', 2)]
-	print(randomtasks_bisect(tasks))
+	tasks = {
+		'CS': 8,
+		'Math': 4,
+		'Lang': 6,
+		'Sci': 2
+	}
+	print(randomtasks(tasks))
